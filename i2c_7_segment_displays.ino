@@ -1,6 +1,6 @@
-#include <Wire.h>
-#define expander1 B0111000
-#define expander2 B0111001
+#include <Wire.h>          // library to communicate with the expander chips
+#define expander1 B0111000 // the first expander chip
+#define expander2 B0111001 // the second expander chip
 
 void setup() {
     Wire.begin();
@@ -8,32 +8,39 @@ void setup() {
 }
 
 void loop() {
+    // count from 0 to 99
     for (int i = 0; i < 100; i++) {
         showNumber(i);
         delay(500);
     }
 }
 
+// write to the first expander chip
 void expanderWrite1(byte _data) {
     Wire.beginTransmission(expander1);
     Wire.write(_data);
     Wire.endTransmission();
 }
 
+
+// write to the second expander chip
 void expanderWrite2(byte _data) {
     Wire.beginTransmission(expander2);
     Wire.write(_data);
     Wire.endTransmission();
 }
 
+// get the first digit of a number
 int firstDigit(int number) {
-	return (number - (number % 10)) / 10;
+    return (number - (number % 10)) / 10;
 }
 
+// get the second digit of a number
 int secondDigit(int number) {
-	return number % 10;
+    return number % 10;
 }
 
+// show a 2-digit number on two 7-segnment displays
 void showNumber(int number) {
     int digit1 = firstDigit(number);
     int digit2 = secondDigit(number);
