@@ -1,1 +1,1 @@
-# i2c-7-segment-display
+# I2C with 7 segment displays
